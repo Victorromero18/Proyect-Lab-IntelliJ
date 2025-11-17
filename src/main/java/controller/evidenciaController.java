@@ -13,7 +13,7 @@ import java.util.List;
 public class EvidenciaController {
 
     @Autowired
-    private EvidenciaRepository evidenciaRepository;
+    private EvidenciaRepository evidenciaRepository; 
 
     // GET -> Obtener todas las evidencias
     @GetMapping
