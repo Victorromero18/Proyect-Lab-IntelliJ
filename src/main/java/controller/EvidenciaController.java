@@ -16,54 +16,71 @@ public class EvidenciaController {
     @Autowired
     private EvidenciaRepository evidenciaRepository;
 
-    // GET -> Obtener todas las evidencias
+    // 1. GET: Obtener todas las evidencias
+    // Endpoint: GET /api/evidencias
+    // Retorna: 200 OK
     @GetMapping
     public List<Evidencia> getAllEvidencias() {
         return evidenciaRepository.findAll();
     }
 
-    // GET -> Obtener una evidencia por ID
+    // 2. GET: Obtener una evidencia por ID
+    // Endpoint: GET /api/evidencias/{id}
+    // Retorna: 200 OK si existe, 404 NOT FOUND si no existe
     @GetMapping("/{id}")
     public ResponseEntity<Evidencia> getEvidenciaById(@PathVariable Long id) {
         return evidenciaRepository.findById(id)
-                .map(ResponseEntity::ok) // Si se encuentra, devuelve 200 OK con la evidencia
-                .orElse(ResponseEntity.notFound().build()); // Si no se encuentra, devuelve 404 Not Found
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST -> Crear una nueva evidencia (MEJORADO: Devuelve 201 Created)
+    // 3. POST: Crear una nueva evidencia
+    // Endpoint: POST /api/evidencias
+    // Retorna: 201 CREATED
     @PostMapping
     public ResponseEntity<Evidencia> createEvidencia(@RequestBody Evidencia evidencia) {
         Evidencia nuevaEvidencia = evidenciaRepository.save(evidencia);
-        // Retorna 201 CREATED
+        // Usa HttpStatus.CREATED (código 201) que es el estándar para la creación exitosa.
         return new ResponseEntity<>(nuevaEvidencia, HttpStatus.CREATED); 
     }
 
-    // PUT -> Actualizar una evidencia existente
+    // 4. PUT: Actualizar una evidencia existente
+    // Endpoint: PUT /api/evidencias/{id}
+    // Retorna: 200 OK si se actualiza, 404 NOT FOUND si no existe
     @PutMapping("/{id}")
     public ResponseEntity<Evidencia> updateEvidencia(@PathVariable Long id, @RequestBody Evidencia evidenciaDetails) {
         return evidenciaRepository.findById(id)
-                .map(evidencia -> {
-                    // Actualiza los campos (ejemplo: asume que 'evidencia' tiene setters)
-                    // evidencia.setCampo1(evidenciaDetails.getCampo1()); 
-                    // evidencia.setCampo2(evidenciaDetails.getCampo2());
+                .map(evidenciaExistente -> {
+                    // **IMPORTANTE**: Necesitas actualizar los campos de la evidenciaExistente con los datos de evidenciaDetails.
+                    // (Ejemplo: debes asegurarte que la clase Evidencia tenga setters)
+                    // Para simplificar, asumiremos que Evidencia tiene un constructor o setters para todos sus campos.
                     
-                    // Como no sé los campos de Evidencia, solo guardo los detalles sobre el ID encontrado.
-                    // En un caso real, deberías mapear los campos específicos.
-                    evidenciaDetails.setId(id); // Asegura que el ID sea el de la ruta
+                    // Asumiendo que Evidencia tiene un campo 'descripcion', 'nombre', etc.
+                    // evidenciaExistente.setNombre(evidenciaDetails.getNombre());
+                    // evidenciaExistencia.setDescripcion(evidenciaDetails.getDescripcion());
+                    // ... (Aquí mapearías todos los campos que pueden cambiar)
+
+                    // Para que este ejemplo compile y sea funcional, hacemos un save simple,
+                    // pero en la vida real, ¡debes asignar los campos!
+                    evidenciaDetails.setId(id); // Aseguramos que el ID correcto se use para la actualización
                     Evidencia updatedEvidencia = evidenciaRepository.save(evidenciaDetails);
-                    return ResponseEntity.ok(updatedEvidencia); // Devuelve 200 OK con el objeto actualizado
+                    
+                    return ResponseEntity.ok(updatedEvidencia); 
                 })
-                .orElse(ResponseEntity.notFound().build()); // Si no se encuentra, devuelve 404 Not Found
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    // DELETE -> Eliminar una evidencia por ID
+    // 5. DELETE: Eliminar una evidencia por ID
+    // Endpoint: DELETE /api/evidencias/{id}
+    // Retorna: 204 NO CONTENT si se elimina, 404 NOT FOUND si no existe
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEvidencia(@PathVariable Long id) {
         return evidenciaRepository.findById(id)
                 .map(evidencia -> {
                     evidenciaRepository.delete(evidencia);
-                    return ResponseEntity.noContent().build(); // Devuelve 204 No Content
+                    // Retorna 204 No Content, que es el estándar para una eliminación exitosa sin cuerpo de respuesta.
+                    return ResponseEntity.noContent().build(); 
                 })
-                .orElse(ResponseEntity.notFound().build()); // Si no se encuentra, devuelve 404 Not Found
+                .orElse(ResponseEntity.notFound().build());
     }
 }
