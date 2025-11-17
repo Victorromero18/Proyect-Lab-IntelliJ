@@ -17,12 +17,12 @@ public class TestController {
     }
 
     @GetMapping("/integrante/victor")
-    public String integrante() {
+    public String integranteVictor() {
         return "Victor Romero";
     }
 
     @GetMapping("/integrante/daniel")
-    public String integrante() {
+    public String integranteDaniel() {
         return "Daniel Monroy Marcelo";
     }
 }
