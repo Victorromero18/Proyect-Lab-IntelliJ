@@ -15,7 +15,7 @@ public class EvidenciaController {
     // ===========================================================
     // PUT -> Actualizar evidencia COMPLETA
     // ===========================================================
-    // Endpoint: PUT http://localhost:8080/api/evidencias/{id}
+    
     //
     // Se recibe un JSON y se reemplazan los datos del registro existente.
     @PutMapping("/{id}")
