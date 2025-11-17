@@ -11,8 +11,18 @@ public class TestController {
         return "Hola mundo";
     }
 
-    @GetMapping("/integrante")
-    public String integrante() {
+    @GetMapping("/adios")
+    public String adios() {
+        return "Adiós mundo";
+    }
+
+    @GetMapping("/integrante/victor")
+    public String integranteVictor() {
         return "Victor Romero";
+    }
+
+    @GetMapping("/integrante/daniel")
+    public String integranteDaniel() {
+        return "Daniel Monroy Marcelo";
     }
 }
