@@ -28,6 +28,6 @@ public class TestController {
 
     @GetMapping("/integrante/alan")
     public String integranteAlan() {
-        return "Cristian Alan Tapia";
+        return "Cristian Alan Tapia.";
     }
 }
