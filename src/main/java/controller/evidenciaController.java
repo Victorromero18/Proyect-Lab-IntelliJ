@@ -1,7 +1,8 @@
-package com.tuempresa.tuapp.controller;
 
-import com.tuempresa.tuapp.model.Evidencia;
-import com.tuempresa.tuapp.repository.EvidenciaRepository;
+package com.daniel.proyectlabintellij.controller;
+
+import com.daniel.proyectolabinyellij.model.Evidencia;
+import com.daniel.proyectolabinyellij.repository.EvidenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
