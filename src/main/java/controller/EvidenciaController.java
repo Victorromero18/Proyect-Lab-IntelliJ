@@ -1,8 +1,7 @@
- 
-package com.daniel.proyectlabintellij.controller;
+package com.victor.proyectlabintellij.controller;
 
-import com.daniel.proyectolabinyellij.model.Evidencia;
-import com.daniel.proyectolabinyellij.repository.EvidenciaRepository;
+import com.victor.proyectlabintellij.model.Evidencia;
+import com.victor.proyectlabintellij.repository.EvidenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,15 +12,15 @@ import java.util.List;
 public class EvidenciaController {
 
     @Autowired
-    private EvidenciaRepository evidenciaRepository; 
+    private EvidenciaRepository evidenciaRepository;
 
-    // GET -> Obtener todas las evidencias
+    // GET -> Obtener todas las evidencias (Método de Daniel)
     @GetMapping
     public List<Evidencia> getAllEvidencias() {
         return evidenciaRepository.findAll();
     }
 
-    // POST -> Crear una nueva evidencia
+    // POST -> Crear una nueva evidencia (Método de Daniel)
     @PostMapping
     public Evidencia createEvidencia(@RequestBody Evidencia evidencia) {
         return evidenciaRepository.save(evidencia);
