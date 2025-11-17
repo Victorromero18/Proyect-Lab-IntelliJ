@@ -26,7 +26,7 @@ public class TestController {
         return "Daniel Monroy Marcelo";
     }
 
-    @GetMapping("/integrante/daniel")
+    @GetMapping("/integrante/alan")
     public String integranteDaniel() {
         return "Cristian Alan Tapia";
     }
